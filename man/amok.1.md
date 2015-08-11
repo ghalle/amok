@@ -30,10 +30,21 @@ While a connection is established, console output from the browser will be mirro
 The `--debug-port` and `--debug-host` options define the address where the
 outbound remote debugging connection will be established.
 
+The `port` and `host` options define the address where the multiplexer will
+be listening for remote debugging connections.
+
 The `--hot`, `--watch` and `--interactive` options enable hot code patching,
 file system monitoring and an interactive read-eval-print-loop.
 
 ## OPTIONS
+
+`--port` _PORT_
+:   The port where the multiplexer will be listening for remote debugging connections,
+by default this will be on port `4000`.
+
+`--host` __HOST__
+:   The host name where the multiplexer will be listening for remote debugging connections,
+by default this will be `localhost`.
 
 `--debug-port` _PORT_
 :   The port number where the remote debugging connection will be established,
