@@ -3,6 +3,7 @@ var fs = require('fs');
 var test = require('tape');
 var url = require('url');
 var path = require('path');
+var temp = require('temp');
 
 var browsers = [
   'chrome',
@@ -12,6 +13,18 @@ var browsers = [
 browsers.forEach(function (browser, index) {
   var port = 4000 + index;
 
+  temp.track();
+  var dirname = temp.mkdirSync();
+  fs.writeFileSync(
+    path.join(dirname, 'index.html'),
+    fs.readFileSync('test/fixture/watch-events/index.html', 'utf-8')
+  );
+
+  fs.writeFileSync(
+    path.join(dirname, 'index.js'),
+    fs.readFileSync('test/fixture/watch-events/index.js', 'utf-8')
+  );
+
   test('watch events in ' + browser, function (test) {
     test.plan(7);
 
@@ -20,7 +33,7 @@ browsers.forEach(function (browser, index) {
       test.pass('close');
     });
 
-    runner.set('url', url.resolve('file://', path.join('/' + __dirname, '/fixture/watch-events/index.html')));
+    runner.set('url', url.resolve('file://', path.join('/' + dirname, 'index.html')));
 
     runner.set('cwd', 'test/fixture/watch-events');
     runner.use(amok.browser(port, browser));
