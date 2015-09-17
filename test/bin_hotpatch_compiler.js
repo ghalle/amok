@@ -23,25 +23,25 @@ var compilers = [
 
 browsers.forEach(function (browser) {
   compilers.forEach(function (compiler, index) {
-    test('bin hot patch basic compiled with ' + compiler + ' in ' + browser, function (test) {
+    var dirname = 'test/fixture/hotpatch-' + compiler;
+    var entries = fs.readdirSync(dirname).map(function (filename) {
+      return path.join(dirname, filename);
+    }).filter(function (filename) {
+      return filename.match(/(.js|.ts|.coffee)$/);
+    });
+
+    var args = [
+      bin,
+      '--hot',
+      '--compiler',
+      compiler,
+      '--browser',
+      browser,
+      entries[0]
+    ];
+
+    test(args.join(' '), function (test) {
       test.plan(13);
-
-      var dirname = 'test/fixture/hotpatch-' + compiler;
-      var entries = fs.readdirSync(dirname).map(function (filename) {
-        return path.join(dirname, filename);
-      }).filter(function (filename) {
-        return filename.match(/(.js|.ts|.coffee)$/);
-      });
-
-      var args = [
-        bin,
-        '--hot',
-        '--compiler',
-        compiler,
-        '--browser',
-        browser,
-        entries[0]
-      ];
 
       var ps = child.spawn('node', args);
       ps.stderr.pipe(process.stderr);
