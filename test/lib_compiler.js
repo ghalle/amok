@@ -13,7 +13,7 @@ var commands = [
 
 commands.forEach(function (command, index) {
   test('compile with ' + command, function (test) {
-    test.plan(6);
+    test.plan(7);
 
     var runner = amok.createRunner();
 
@@ -24,7 +24,12 @@ commands.forEach(function (command, index) {
       return filename.search('out') === -1;
     });
 
+
     runner.use(amok.compiler(command, entries));
+    runner.on('compiler', function(compiler) {
+      test.ok(compiler);
+    });
+
     runner.run(function (error, client, runner) {
       test.error(error);
       test.ok(client, 'client');
