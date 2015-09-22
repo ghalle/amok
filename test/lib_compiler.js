@@ -24,8 +24,10 @@ commands.forEach(function (command, index) {
       return filename.search('out') === -1;
     });
 
+    runner.use(amok.compiler(command, entries, {
+      stdio: 'ignore'
+    }));
 
-    runner.use(amok.compiler(command, entries));
     runner.on('compiler', function(compiler) {
       test.ok(compiler);
     });

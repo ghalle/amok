@@ -36,7 +36,7 @@ browsers.forEach(function (browser, index) {
 
       runner.use(amok.server(9966, 'localhost'));
       runner.use(amok.compiler(compiler, entries, {
-        stdio: 'inherit'
+        stdio: 'ignore'
       }));
 
       runner.use(amok.browser(port, browser));
