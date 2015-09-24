@@ -12,6 +12,6 @@ test_script:
   - set PATH=.\node_modules\.bin;%PATH%
   - node --version
   - npm --version
-  - make test
+  - npm test
 
 build: off
