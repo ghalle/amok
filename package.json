@@ -44,7 +44,7 @@
     "webpack": "1.9.10"
   },
   "scripts": {
-    "test": "make test"
+    "test": "make test && exit 0"
   },
   "author": "Casper Beyer <caspervonb@qup.io>",
   "license": "MIT",
