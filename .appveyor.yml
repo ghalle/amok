@@ -2,16 +2,17 @@ environment:
   nodejs_version: "4.0"
 
 install:
-  - ps: $env:PATH='C:\MinGW\bin;C:\MinGW\mingw32\bin;C:\MinGW\msys\1.0\bin;' + $env:PATH
-  - cmd: copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
   - ps: Install-Product node $env:nodejs_version
+  - set PATH=C:\MinGW\bin;C:\MinGW\mingw32\bin;C:\MinGW\msys\1.0\bin;%PATH%
+  - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
   - choco install Chromium
   - choco install GoogleChrome
-  - npm install
+  - npm install --no-optional
 
 test_script:
+  - set PATH=.\node_modules\.bin;%PATH%
   - node --version
   - npm --version
-  - npm test
+  - tape "test\*.js"
 
 build: off
