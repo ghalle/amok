@@ -3,9 +3,9 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - choco install cake
-  - choco install chromium
-  - choco install googlechrome
+  - ps: choco install make
+  - ps: choco install chromium
+  - ps: choco install googlechrome
   - npm install --no-optional
 
 test_script:
