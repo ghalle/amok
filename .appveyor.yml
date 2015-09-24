@@ -3,10 +3,9 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - set PATH=C:\MinGW\bin;C:\MinGW\mingw32\bin;C:\MinGW\msys\1.0\bin;%PATH%
-  - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
-  - choco install Chromium
-  - choco install GoogleChrome
+  - choco install cake
+  - choco install chromium
+  - choco install googlechrome
   - npm install --no-optional
 
 test_script:
